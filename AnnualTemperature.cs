@@ -6,12 +6,22 @@ using System.Threading.Tasks;
 
 namespace _8.cviceni
 {
-	class AnnualTemperature
+	public class AnnualTemperature
 	{
 		private int year;
 		private double maxTemperature;
 		private double minTemperature;
 		private double averageTemperature;
+
+		public AnnualTemperature(int Year, List<double> YearTemperatures)
+		{
+			year = Year;
+			MonthlyTemperatures = YearTemperatures;
+
+		}
+
+		public List<double> MonthlyTemperatures
+		{ get; set; }
 
 		public int Year
 		{
@@ -24,10 +34,7 @@ namespace _8.cviceni
 				{ throw new ArgumentOutOfRangeException($" For {nameof(year)} have no temperatures!"); }
 
 			}
-
 		}
-		public List<double> MonthlyTemperatures
-		{ get; set; }
 
 		public double MaxTemperature
 		{
@@ -39,14 +46,6 @@ namespace _8.cviceni
 				}
 
 				return maxTemperature = MonthlyTemperatures.Max();
-				/*foreach (double Temperature in MonthlyTemperatures)
-				{
-					if (Temperature > maxTemperature)
-					{
-						maxTemperature = Temperature;
-					}
-				}
-				return maxTemperature;*/
 			}
 		}
 
@@ -58,23 +57,20 @@ namespace _8.cviceni
 				{
 					throw new ArgumentException("List of monthly temperatures is empty");
 				}
-
 				return minTemperature = MonthlyTemperatures.Min();
-				/*foreach (double Temperature in MonthlyTemperatures)
-				{
-					if (Temperature < minTemperature)
-					{
-						minTemperature = Temperature;
-					}
-				}
-				return minTemperature;*/
 			}
 		}
 		public double AverageTemperature
 		{
-			get { return averageTemperature = MonthlyTemperatures.Average(); }
+			get
+			{
+				if (MonthlyTemperatures.Count == 0)
+				{
+					throw new ArgumentException("List of monthly temperatures is empty");
+				}
+
+				return averageTemperature = MonthlyTemperatures.Average();
+			}
 		}
-
-
 	}
 }

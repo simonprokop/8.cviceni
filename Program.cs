@@ -12,6 +12,22 @@ namespace _8.cviceni
 		{
 
 
+			TemperatureArchive archive = TemperatureArchive.Load("D:\\Archive.txt");
+
+			archive.Calibration(-5);
+
+			archive.Search(2010);
+
+			archive.PrintAnnualTemperatures();
+
+			archive.PrintMonthlyTemperatures();
+
+			archive.PrintTemperatures();
+
+			archive.Save("D:\\Archive.txt");
+
+
+			Console.ReadLine();
 		}
 	}
 }
